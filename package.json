@@ -1,0 +1,21 @@
+{
+  "name": "webpagetest-keen",
+  "version": "0.0.1",
+  "description": "To record and analyse webpage test result using keen",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "keen",
+    "webpagetest"
+  ],
+  "author": "sebastian",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "keen-js": "^3.4.1",
+    "lodash": "^4.17.4",
+    "webpagetest": "^0.3.4"
+  }
+}
