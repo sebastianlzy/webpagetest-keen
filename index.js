@@ -2,12 +2,10 @@ const WebPageTest = require('webpagetest');
 const util = require('util')
 const _keen = require('keen-js');
 const get = require('lodash/get');
-const map = require('lodash/map');
 const pick = require('lodash/pick');
 const program = require('commander');
 
 const pageTestKeys = require('./pageTestKeys').index();
-const sampleResult = require('./sampleResult').index();
 
 program
     .version('0.0.1')
