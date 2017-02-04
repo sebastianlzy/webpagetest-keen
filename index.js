@@ -15,13 +15,6 @@ program
     .option('-k, --keen-write-key [keenWriteKey]', 'Add Keen write keey')
     .parse(process.argv);
 
-console.log('===================== program ======================');
-console.log('program.url -', program.url)
-console.log('program.webPageTestkey -', program.webPageTestKey)
-console.log('program.keenProjectId -', program.keenProjectId)
-console.log('program.keenWriteKey -', program.keenWriteKey)
-console.log('===================== program ======================');
-
 const url = program.url;
 const wpt = new WebPageTest('www.webpagetest.org', program.webPageTestKey);
 const keen = new _keen({
@@ -40,19 +33,15 @@ const pickTrackingInfo = (data) => {
 
 console.log('Please wait... sending for test - ', url)
 wpt.runTest(url, wptOptions, function(err, data) {
-    console.log('err' - err)
     if (data) {
-        console.log('===================== data ======================');
-        console.log(pickTrackingInfo(data))
-        console.log('===================== data ======================');
         console.log('Test completed... sending data to Keen')
         keen.addEvent("webpagetest", pickTrackingInfo(data), function(err, res){
-            console.log('===================== res ======================');
-            console.log('res || err -', res || err)
-            console.log('===================== res ======================');
             if(res) {
                 console.log('Sent.')
+                return;
             }
         });
+        return;
     }
+    console.log('Oops! An error has occurred - ', err);
 });
