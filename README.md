@@ -1,4 +1,4 @@
-## Motiviation
+## Motivation
 To store and analzye webpagetest results using Keen.io
 
 ## Usage
