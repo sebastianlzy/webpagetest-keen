@@ -1,15 +1,16 @@
-## Webpagetest with Keen.io
+# Webpagetest with Keen.io
 [![Build Status](https://travis-ci.org/sebastianlzy/webpagetest-keenio.svg?branch=master)](https://travis-ci.org/sebastianlzy/webpagetest-keenio)
+[![Coverage Status](https://coveralls.io/repos/github/sebastianlzy/webpagetest-keen/badge.svg?branch=master)](https://coveralls.io/github/sebastianlzy/webpagetest-keen?branch=master)
 
 ## Motivation
-To store and analzye webpagetest results using Keen.io
+To record and analyse webpage test result using keen
 
 ## Getting the required keys
 1. [Obtaining Webpage Test API key](https://www.webpagetest.org/getkey.php)
 2. [Locations of all Webpage Test servers](https://www.webpagetest.org/getLocations.php?f=html&k=A)
 3. [Setting up Keen.io](https://keen.io/guides/getting-started/)
 
-## install
+## Install
 `npm install -g webpagetest-keen`
 
 ## Usage
@@ -135,3 +136,8 @@ wpt-keen --help
 
 ```
 
+### Improvement
+
+1. [ ] Test/Test coverage > 80%
+
+Any feedbacks or contributions are welcome!
