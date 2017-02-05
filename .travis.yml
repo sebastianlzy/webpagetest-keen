@@ -2,7 +2,9 @@ language: node_js
 dist: trusty
 node_js: '6'
 before_script: npm install
-script: npm run test
+script:
+- npm run test
+- npm run start -- -w $webPageTestkey -p $keenProjectId -k $keenWriteKey
 deploy:
   provider: npm
   email: sebastian.lzy@gmail.com
