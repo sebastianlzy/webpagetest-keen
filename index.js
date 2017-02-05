@@ -79,7 +79,7 @@ const sendDataToKeen = (keenProjectId, keenWriteKey, url) => (data) => {
 module.exports.isNecessaryApiKeysProvided = isNecessaryApiKeysProvided
 
 module.exports.default = () => {
-    program.url = 'www.shopback.my'
+    program.url = 'www.shopback.sg/best-deals'
 
     Promise.resolve()
     .then(isNecessaryApiKeysProvided(program, program.url))
