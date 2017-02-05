@@ -1,5 +1,5 @@
 # Webpagetest with Keen.io
-[![Build Status](https://travis-ci.org/sebastianlzy/webpagetest-keenio.svg?branch=master)](https://travis-ci.org/sebastianlzy/webpagetest-keenio)
+[![Build Status](https://travis-ci.org/sebastianlzy/webpagetest-keen.svg?branch=master)](https://travis-ci.org/sebastianlzy/webpagetest-keen)
 [![Coverage Status](https://coveralls.io/repos/github/sebastianlzy/webpagetest-keen/badge.svg?branch=master)](https://coveralls.io/github/sebastianlzy/webpagetest-keen?branch=master)
 
 ## Motivation
