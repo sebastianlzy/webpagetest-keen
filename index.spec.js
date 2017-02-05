@@ -12,18 +12,14 @@ describe('isNecessaryApiKeysProvided()', function() {
     }
 
     it('should provide all the necessary keys', function() {
-        let program = {
-            webPageTestKey: 'key',
-            keenProjectId: 'id',
-            keenWriteKey: 'key'
-        }
         expect((webpagetestKeen.isNecessaryApiKeysProvided(program, 'www.gateway.com')())).to.be.true;
     });
 
 
     Object.keys(program).forEach((key) => {
         it(`should throw an error if ${key} is missing`, function() {
-            expect((webpagetestKeen.isNecessaryApiKeysProvided(set(program, key, '')))).to.throw();
+            const newProgram = set(program, key, '');
+            expect((webpagetestKeen.isNecessaryApiKeysProvided(newProgram, newProgram.url))).to.throw();
         });
     });
 
