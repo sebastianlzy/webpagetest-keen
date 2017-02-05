@@ -4,9 +4,9 @@
 To store and analzye webpagetest results using Keen.io
 
 ## Getting the required keys
-1. (WebpageTest)[https://www.webpagetest.org/getkey.php]
-2. (Webpage Test Locations)[https://www.webpagetest.org/getLocations.php?f=html&k=A]
-3. (Keen.io)[https://keen.io/guides/getting-started/]
+1. [Obtaining Webpage Test API key](https://www.webpagetest.org/getkey.php)
+2. [Locations of all Webpage Test servers](https://www.webpagetest.org/getLocations.php?f=html&k=A)
+3. [Setting up Keen.io](https://keen.io/guides/getting-started/)
 
 ## install
 `npm install -g webpagetest-keen`
@@ -25,7 +25,8 @@ wpt-keen --help
 
 ```
 
-## Sample report sent to Keen.io
+
+## Sample report 
 ```json
 {
     "url": "www.shopback.sg",
@@ -131,3 +132,4 @@ wpt-keen --help
 }    
 
 ```
+
