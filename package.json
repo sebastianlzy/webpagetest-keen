@@ -8,8 +8,9 @@
   },
   "scripts": {
     "test": "mocha index.spec.js",
+    "coverage": "nyc --reporter=text-lcov npm run test | coveralls",
     "test:watch": "mocha --watch index.spec.js",
-    "test:coverage": "nyc --reporter=text-lcov npm run test | coveralls",
+    "test:coverage": "nyc npm run test",
     "start": "node lib/main.js"
   },
   "repository": {

@@ -3,7 +3,7 @@ dist: trusty
 node_js: '6'
 before_script: npm install
 script: npm run test
-after_success: npm run test:coverage
+after_success: npm run coverage
 deploy:
   provider: npm
   email: sebastian.lzy@gmail.com

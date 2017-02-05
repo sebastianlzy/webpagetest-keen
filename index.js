@@ -38,7 +38,6 @@ const isNecessaryApiKeysProvided = (program, url) => () => {
     if(isEmpty(program.keenWriteKey)) {
         throw {msg: 'Keen write key is not defined'}
     }
-    console.info('Please wait... sending for test - ', program.url)
     return true;
 }
 
@@ -77,10 +76,12 @@ const sendDataToKeen = (keenProjectId, keenWriteKey, url) => (data) => {
 }
 
 module.exports.isNecessaryApiKeysProvided = isNecessaryApiKeysProvided
+module.exports.pickTrackingInfo = pickTrackingInfo
 
 module.exports.default = () => {
     Promise.resolve()
     .then(isNecessaryApiKeysProvided(program, program.url))
+    .then(() => console.info('Please wait... sending for test - ', program.url))
     .then(runWebPageTest(program.webPageTestKey, program.webPageTestLocation, program.url))
     .then(sendDataToKeen(program.keenProjectId, program.keenWriteKey, program.url))
     .catch((err) => {
