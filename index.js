@@ -24,9 +24,9 @@ const pickTrackingInfo = (data, url) => {
     return {url, firstView, repeatView}
 }
 
-const isNecessaryApiKeysProvided = (program) => () => {
+const isNecessaryApiKeysProvided = (program, url) => () => {
 
-    if(isEmpty(program.url)) {
+    if(isEmpty(url)) {
         throw {msg: 'Url is not defined'}
     }
     if(isEmpty(program.webPageTestKey)) {
@@ -80,7 +80,7 @@ module.exports.isNecessaryApiKeysProvided = isNecessaryApiKeysProvided
 
 module.exports.default = () => {
     Promise.resolve()
-    .then(isNecessaryApiKeysProvided(program))
+    .then(isNecessaryApiKeysProvided(program, program.url))
     .then(runWebPageTest(program.webPageTestKey, program.webPageTestLocation, program.url))
     .then(sendDataToKeen(program.keenProjectId, program.keenWriteKey, program.url))
     .catch((err) => {
