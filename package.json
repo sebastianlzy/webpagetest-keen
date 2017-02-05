@@ -1,6 +1,6 @@
 {
   "name": "webpagetest-keen",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "To record and analyse webpage test result using keen",
   "main": "main.js",
   "bin": {
