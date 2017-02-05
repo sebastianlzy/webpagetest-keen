@@ -79,6 +79,8 @@ const sendDataToKeen = (keenProjectId, keenWriteKey, url) => (data) => {
 module.exports.isNecessaryApiKeysProvided = isNecessaryApiKeysProvided
 
 module.exports.default = () => {
+    program.url = 'www.shopback.co.id'
+
     Promise.resolve()
     .then(isNecessaryApiKeysProvided(program, program.url))
     .then(runWebPageTest(program.webPageTestKey, program.webPageTestLocation, program.url))
