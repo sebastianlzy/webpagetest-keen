@@ -2,6 +2,7 @@ const WebPageTest = require('webpagetest');
 const util = require('util')
 const _keen = require('keen-js');
 const get = require('lodash/get');
+const isEmpty = require('lodash/isEmpty');
 const pick = require('lodash/pick');
 const program = require('commander');
 
@@ -9,39 +10,80 @@ const pageTestKeys = require('./pageTestKeys').index();
 
 program
     .version('0.0.1')
-    .option('-u, --url [url]', 'Add url')
-    .option('-w, --web-page-test-key [webPageTestKey]', 'Add web page test key')
-    .option('-p, --keen-project-id [keenProjectId]', 'Add Keen project id')
-    .option('-k, --keen-write-key [keenWriteKey]', 'Add Keen write keey')
+    .option('-u, --url <url>', 'Add url')
+    .option('-w, --web-page-test-key <webPageTestKey>', 'Add web page test key')
+    .option('-p, --keen-project-id <keenProjectId>', 'Add Keen project id')
+    .option('-k, --keen-write-key <keenWriteKey>', 'Add Keen write keey')
+    .option('-l, --web-page-test-location <webPageTestLocation>', 'Specify webpagetest server location <webPageTestLocation>', 'ec2-ap-southeast-1')
     .parse(process.argv);
 
-const url = program.url;
-const wpt = new WebPageTest('www.webpagetest.org', program.webPageTestKey);
-const keen = new _keen({
-    projectId: program.keenProjectId,
-    writeKey: program.keenWriteKey
-});
-
-const wptOptions = {location: 'ec2-ap-southeast-1', pollResults: 30, timeout: 900}
-
-const pickTrackingInfo = (data) => {
+const pickTrackingInfo = (data, url) => {
     let firstView = pick(get(data, 'data.median.firstView'), pageTestKeys);
     let repeatView = pick(get(data, 'data.median.repeatView'), pageTestKeys);
 
     return {url, firstView, repeatView}
 }
 
-console.log('Please wait... sending for test - ', url)
-wpt.runTest(url, wptOptions, function(err, data) {
-    if (data) {
-        console.log('Test completed... sending data to Keen')
-        keen.addEvent("webpagetest", pickTrackingInfo(data), function(err, res){
-            if(res) {
-                console.log('Sent.')
-                return;
-            }
-        });
-        return;
+const isNecessaryApiKeysProvided = (program) => () => {
+
+    if(isEmpty(program.url)) {
+        throw {msg: 'Url is not defined'}
     }
-    console.log('Oops! An error has occurred - ', err);
-});
+    if(isEmpty(program.webPageTestKey)) {
+        throw {msg: 'Web Page Test Key is not defined'}
+    }
+    if(isEmpty(program.keenProjectId)) {
+        throw {msg: 'Keen project id is not defined'}
+    }
+    if(isEmpty(program.keenWriteKey)) {
+        throw {msg: 'Keen write key is not defined'}
+    }
+    console.info('Please wait... sending for test - ', program.url)
+    return true;
+}
+
+const runWebPageTest = (webPageTestKey, webPageTestLocation, url) => () => {
+    
+    const wpt = new WebPageTest('www.webpagetest.org', webPageTestKey);
+    const wptOptions = {location: webPageTestLocation, pollResults: 30, timeout: 900}
+
+    return new Promise((resolve, reject) => {
+        return wpt.runTest(url, wptOptions, function(err, data) {
+            if(data) {
+                console.info('Test completed... sending data to Keen.io')
+                resolve(data);
+            }
+            reject({msg: `Oops! An error has occurred when retrieving data from webpagetest -  ${err}`});
+        });
+    })
+
+}
+
+const sendDataToKeen = (keenProjectId, keenWriteKey, url) => (data) => {
+    const keen = new _keen({
+        projectId: keenProjectId,
+        writeKey: keenWriteKey
+    });
+
+    return new Promise((resolve, reject) => {
+        return keen.addEvent("webpagetest", pickTrackingInfo(data, url), function(err, res){
+            if(res) {
+                console.log('Data sent to Keen.io')
+                resolve()
+            }
+            reject({msg: `Oops! An error prevented us from sending data to Keen.io - ${err}`});
+        });
+    })
+}
+
+module.exports.isNecessaryApiKeysProvided = isNecessaryApiKeysProvided
+
+module.exports.default = () => {
+    Promise.resolve()
+    .then(isNecessaryApiKeysProvided(program))
+    .then(runWebPageTest(program.webPageTestKey, program.webPageTestLocation, program.url))
+    .then(sendDataToKeen(program.keenProjectId, program.keenWriteKey, program.url))
+    .catch((err) => {
+        console.error(err.msg)
+    })
+}

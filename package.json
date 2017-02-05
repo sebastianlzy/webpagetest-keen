@@ -2,10 +2,14 @@
   "name": "webpagetest-keen",
   "version": "0.0.1",
   "description": "To record and analyse webpage test result using keen",
-  "main": "index.js",
+  "main": "main.js",
+  "bin": {
+    "wpt-keen": "bin/main.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "mocha index.spec.js",
+    "test:watch": "mocha --watch index.spec.js",
+    "start": "node lib/main.js"
   },
   "keywords": [
     "keen",
@@ -18,5 +22,9 @@
     "keen-js": "^3.4.1",
     "lodash": "^4.17.4",
     "webpagetest": "^0.3.4"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
   }
 }
