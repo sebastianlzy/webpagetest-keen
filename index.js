@@ -9,7 +9,7 @@ const program = require('commander');
 const pageTestKeys = require('./pageTestKeys').index();
 
 program
-    .version('0.0.6')
+    .version('0.0.7')
     .option('-u, --url <url>', 'Add the url to be tested')
     .option('-w, --web-page-test-key <webPageTestKey>', 'Add web page test key')
     .option('-p, --keen-project-id <keenProjectId>', 'Add Keen project id')
