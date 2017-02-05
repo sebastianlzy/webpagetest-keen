@@ -1,4 +1,5 @@
 ## Webpagetest with Keen.io
+[![Build Status](https://travis-ci.org/sebastianlzy/webpagetest-keenio.svg?branch=master)](https://travis-ci.org/sebastianlzy/webpagetest-keenio)
 
 ## Motivation
 To store and analzye webpagetest results using Keen.io
