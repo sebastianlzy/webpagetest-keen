@@ -11,12 +11,17 @@
     "test:watch": "mocha --watch index.spec.js",
     "start": "node lib/main.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sebastianlzy/webpagetest-keenio"
+  },
   "keywords": [
     "keen",
-    "webpagetest"
+    "webpagetest",
+    "website performance monitoring"
   ],
   "author": "sebastian",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "commander": "^2.9.0",
     "keen-js": "^3.4.1",
