@@ -10,7 +10,7 @@ const pageTestKeys = require('./pageTestKeys').index();
 
 program
     .version('0.0.1')
-    .option('-u, --url <url>', 'Add url')
+    .option('-u, --url <url>', 'Add the url to be tested')
     .option('-w, --web-page-test-key <webPageTestKey>', 'Add web page test key')
     .option('-p, --keen-project-id <keenProjectId>', 'Add Keen project id')
     .option('-k, --keen-write-key <keenWriteKey>', 'Add Keen write keey')
