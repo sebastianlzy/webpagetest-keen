@@ -9,7 +9,7 @@ const program = require('commander');
 const pageTestKeys = require('./pageTestKeys').index();
 
 program
-    .version('0.0.1')
+    .version('0.0.6')
     .option('-u, --url <url>', 'Add the url to be tested')
     .option('-w, --web-page-test-key <webPageTestKey>', 'Add web page test key')
     .option('-p, --keen-project-id <keenProjectId>', 'Add Keen project id')
@@ -84,6 +84,7 @@ module.exports.default = () => {
     .then(runWebPageTest(program.webPageTestKey, program.webPageTestLocation, program.url))
     .then(sendDataToKeen(program.keenProjectId, program.keenWriteKey, program.url))
     .catch((err) => {
-        console.error(err.msg)
+        console.error('');
+        console.error(`ERROR: ${err.msg}`)
     })
 }
